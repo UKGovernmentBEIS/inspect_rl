@@ -2,6 +2,8 @@
 
 **Reinforcement finetuning using [Inspect](https://inspect.aisi.org.uk/) tasks as the reward signal.**
 
+_Disclaimer (May 2026): This is experimental research code and we have not committed to significant maintenance or further development_
+
 Inspect owns the full rollout — solvers, tools, sandboxed environments, multi-turn conversations — while [TRL](https://huggingface.co/docs/trl/index)'s GRPO computes policy gradients. Any Inspect task you can evaluate, you can train on.
 
 ## A note on training with evaluation tasks
