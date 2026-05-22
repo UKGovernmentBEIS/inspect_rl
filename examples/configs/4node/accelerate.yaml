@@ -1,0 +1,35 @@
+# 3-node, 4-GPU-per-node trainer config with FSDP SHARD_GRAD_OP (12 ranks total).
+#
+# SHARD_GRAD_OP is the ZeRO-2 equivalent: shards optimizer state + gradients
+# across ranks but keeps full parameters on each GPU. Necessary for 7B+ models
+# where Adam fp32 master+m+v would OOM with plain DDP on a GH200.
+#
+# Uses PyTorch built-in FSDP1 — no external CUDA ops, no JIT compile. The
+# companion slurm_4node_16gpu.sbatch fans out the three sruns and passes
+# --machine_rank $SLURM_NODEID --main_process_ip $HEAD_TRAINER on the CLI.
+#
+# TRL weight-sync: uses _sync_fsdp1_params_to_vllm (requires fsdp_use_orig_params).
+compute_environment: LOCAL_MACHINE
+distributed_type: FSDP
+num_machines: 3
+num_processes: 12
+# Overridden per-machine on the CLI by the sbatch:
+#   --machine_rank $SLURM_NODEID --main_process_ip $HEAD_TRAINER
+machine_rank: 0
+main_process_ip: 0.0.0.0
+main_process_port: 29500
+rdzv_backend: static
+same_network: true
+gpu_ids: all
+use_cpu: false
+debug: false
+mixed_precision: bf16
+fsdp_config:
+  fsdp_version: 1
+  fsdp_sharding_strategy: SHARD_GRAD_OP
+  fsdp_auto_wrap_policy: TRANSFORMER_BASED_WRAP
+  fsdp_transformer_layer_cls_to_wrap: Qwen2DecoderLayer
+  fsdp_backward_prefetch: BACKWARD_PRE
+  fsdp_state_dict_type: FULL_STATE_DICT
+  fsdp_use_orig_params: true
+  fsdp_activation_checkpointing: false

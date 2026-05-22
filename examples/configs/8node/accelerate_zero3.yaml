@@ -1,0 +1,25 @@
+# 7-node, 4-GPU-per-node trainer config with DeepSpeed ZeRO-3 (28 ranks total).
+#
+# Sized for Qwen2.5-72B-Instruct: 144 GB bf16 params. Per-rank memory under
+# ZeRO-3 with 28 ranks: ~5 GB params + 30 GB Adam state + 5 GB grads = ~40 GB
+# per H100 96 GB GPU. Leaves room for activations + vLLM weight-sync buffers.
+#
+# Companion: 8node/slurm.sbatch (1 vLLM node TP=4 + 7 trainer nodes × 4 GPUs).
+compute_environment: LOCAL_MACHINE
+distributed_type: DEEPSPEED
+num_machines: 7
+num_processes: 28
+# Overridden per-machine on the CLI by the sbatch:
+#   --machine_rank $SLURM_NODEID --main_process_ip $HEAD_TRAINER
+machine_rank: 0
+main_process_ip: 0.0.0.0
+main_process_port: 29500
+rdzv_backend: static
+same_network: true
+gpu_ids: all
+use_cpu: false
+debug: false
+deepspeed_config:
+  deepspeed_config_file: examples/configs/8node/deepspeed.json
+  zero3_init_flag: true
+  deepspeed_multinode_launcher: standard

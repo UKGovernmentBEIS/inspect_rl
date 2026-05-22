@@ -1,0 +1,100 @@
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x400697f13b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x400697f23b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x400697f33b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x400697f43b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x400697f53b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x400697f63b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x400697f73b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x400697f83b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x400697f93b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x400697fa3b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x400697fb3b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x400697fc3b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x400697fd3b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x400697fe3b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x400697ff3b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x40069feb3b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x40069fec3b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x40069fed3b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x40069fee3b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x40069fef3b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x40069ff03b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x40069ff13b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x40069ff23b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x40069ff33b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x40069ff43b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x40069ff53b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x40069ff63b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x40069ff73b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x40069ff83b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x40069ff93b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x40069ffa3b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+[2026-05-13 19:09:40] <redacted-nid>:133173:133805 [0] ofi_process_cq:196 NCCL WARN NET/OFI Request 0x40069ffb3b98 completed with error. RC: 107. Error: Inappropriate ioctl for device. Completed length: 0, Request: { dev: 0, size: 0, state: CREATED, direction: SEND }
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)
+libfabric:133173:1778699380::cxi:av:cxip_av_insert_addr():114<warn> <redacted-nid>: nid=0x8f0 pid=4 inserted multiple times
+libfabric:133173:1778699380::cxi:ep_data:cxip_report_send_completion():675<warn> <redacted-nid>: TXC (0x862:0): Request dest_addr: 1 caddr.nic: 0X8F0 caddr.pid: 4 error: 0x4025486603b0 (err: 107, VNI_NOT_FOUND)

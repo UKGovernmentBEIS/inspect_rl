@@ -1,0 +1,51 @@
+14:59:45 INFO  inspect_rl.util.display: Logging to /lus/lfs1aip1/scratch/a5q/alexr.a5q/irl_output_slurm/2026-05-15-14-59-45_slurm_202881/train.log
+14:59:45 INFO  inspect_rl.core.trainer: Log file: /lus/lfs1aip1/scratch/a5q/alexr.a5q/irl_output_slurm/2026-05-15-14-59-45_slurm_202881/train.log
+14:59:45 INFO  inspect_rl.core.trainer: Building rollout function (eval_log_dir=/lus/lfs1aip1/scratch/a5q/alexr.a5q/irl_output_slurm/2026-05-15-14-59-45_slurm_202881/eval_logs, resample_rounds=3, off_policy_steps=-1)
+14:59:45 INFO  inspect_rl.core.trainer: Scorers → reward funcs: ['tldr_reward']
+14:59:45 INFO  inspect_rl.core.trainer: Converting train dataset → HF (limit=16)
+14:59:45 INFO  inspect_rl.core.trainer: Train dataset size: 16
+14:59:45 INFO  inspect_rl.core.trainer: Wrapped rollout_func with AutoCalibratingRolloutFunc (warmup then enable freshest prefetch if rollout > train)
+14:59:45 INFO  inspect_rl.core.trainer: Registering val-eval callback (every 2 steps, 4 samples)
+14:59:45 INFO  inspect_rl.core.trainer: Constructing GRPOTrainer (this loads model weights)…
+14:59:52 INFO  inspect_rl.core.trainer: GRPOTrainer ready
+14:59:52 INFO  inspect_rl.core.trainer: === trainer.train() starting (max_steps=5) ===
+14:59:52 INFO  inspect_rl.core.trainer: [eval step 0] baseline val eval starting
+14:59:55 INFO  inspect_rl.core.trainer: [eval step 0] done in 1.2s → /lus/lfs1aip1/scratch/a5q/alexr.a5q/irl_output_slurm/2026-05-15-14-59-45_slurm_202881/eval_logs/000_val
+14:59:55 INFO  inspect_rl.util.display: [eval 0] eval/tldr_reward/accuracy=-190.2500 | 1.2s
+14:59:56 INFO  inspect_rl.core.rollout: [rollout 1] starting: 4 samples
+14:59:56 INFO  inspect_rl.util.display: [step 1/5] tldr_reward=-135.00 | --
+14:59:56 INFO  inspect_rl.core.rollout: [rollout 1] done in 0.5s → /lus/lfs1aip1/scratch/a5q/alexr.a5q/irl_output_slurm/2026-05-15-14-59-45_slurm_202881/eval_logs/001_rollout
+14:59:57 INFO  inspect_rl.core.trainer: [step 1] weight update done in 0.6s (step total 1.6s)
+14:59:57 INFO  inspect_rl.core.rollout: [rollout 2] starting: 4 samples
+14:59:58 INFO  inspect_rl.util.display: [step 2/5] tldr_reward=-383.00 | 1.7s
+14:59:58 INFO  inspect_rl.core.rollout: [rollout 2] done in 0.7s → /lus/lfs1aip1/scratch/a5q/alexr.a5q/irl_output_slurm/2026-05-15-14-59-45_slurm_202881/eval_logs/002_rollout
+14:59:58 INFO  inspect_rl.core.trainer: [step 2] weight update done in 0.3s (step total 1.4s)
+14:59:58 INFO  inspect_rl.core.trainer: [eval step 2] val eval starting
+14:59:59 INFO  inspect_rl.core.trainer: [eval step 2] done in 0.5s → /lus/lfs1aip1/scratch/a5q/alexr.a5q/irl_output_slurm/2026-05-15-14-59-45_slurm_202881/eval_logs/002_val
+14:59:59 INFO  inspect_rl.util.display: [eval 2] eval/tldr_reward/accuracy=-208.7500 | 0.5s
+14:59:59 INFO  inspect_rl.core.rollout: [rollout 3] starting: 4 samples
+15:00:00 INFO  inspect_rl.util.display: [step 3/5] tldr_reward=-287.50 | 1.9s
+15:00:00 INFO  inspect_rl.core.rollout: [rollout 3] done in 0.7s → /lus/lfs1aip1/scratch/a5q/alexr.a5q/irl_output_slurm/2026-05-15-14-59-45_slurm_202881/eval_logs/003_rollout
+15:00:00 INFO  inspect_rl.core.trainer: [step 3] weight update done in 0.4s (step total 1.4s)
+15:00:00 INFO  inspect_rl.core.rollout: [rollout 4] starting: 4 samples
+15:00:01 INFO  inspect_rl.util.display: [step 4/5] tldr_reward=-177.50 | 1.3s
+15:00:01 INFO  inspect_rl.core.rollout: [rollout 4] done in 0.6s → /lus/lfs1aip1/scratch/a5q/alexr.a5q/irl_output_slurm/2026-05-15-14-59-45_slurm_202881/eval_logs/004_rollout
+15:00:01 INFO  inspect_rl.perf.prefetch: Auto off-policy calibration: T_rollout=0.6s T_train=1.0s → stay sync
+15:00:01 INFO  inspect_rl.util.display: [off-policy] auto-tune: trainer is the bottleneck — staying sync (T_rollout=0.6s ≤ T_train=1.0s)
+15:00:01 INFO  inspect_rl.core.trainer: [step 4] weight update done in 0.3s (step total 1.3s)
+15:00:01 INFO  inspect_rl.core.trainer: [eval step 4] val eval starting
+15:00:02 INFO  inspect_rl.core.trainer: [eval step 4] done in 0.6s → /lus/lfs1aip1/scratch/a5q/alexr.a5q/irl_output_slurm/2026-05-15-14-59-45_slurm_202881/eval_logs/004_val
+15:00:02 INFO  inspect_rl.util.display: [eval 4] eval/tldr_reward/accuracy=-226.2500 | 0.6s
+15:00:02 INFO  inspect_rl.core.rollout: [rollout 5] starting: 4 samples
+15:00:03 INFO  inspect_rl.util.display: [step 5/5] tldr_reward=-240.75 | 2.0s
+15:00:03 INFO  inspect_rl.core.rollout: [rollout 5] done in 0.7s → /lus/lfs1aip1/scratch/a5q/alexr.a5q/irl_output_slurm/2026-05-15-14-59-45_slurm_202881/eval_logs/005_rollout
+15:00:03 INFO  inspect_rl.core.trainer: [step 5] weight update done in 0.4s (step total 1.4s)
+15:00:04 INFO  inspect_rl.core.trainer: [step 5] checkpoint saved → /lus/lfs1aip1/scratch/a5q/alexr.a5q/irl_output_slurm/2026-05-15-14-59-45_slurm_202881/checkpoints
+15:00:04 INFO  inspect_rl.core.trainer: [eval step 5] final val eval starting
+15:00:05 INFO  inspect_rl.core.trainer: [eval step 5] done in 0.6s → /lus/lfs1aip1/scratch/a5q/alexr.a5q/irl_output_slurm/2026-05-15-14-59-45_slurm_202881/eval_logs/005_val
+15:00:05 INFO  inspect_rl.util.display: [eval 5] eval/tldr_reward/accuracy=-225.7500 | 0.6s
+15:00:05 INFO  inspect_rl.util.display: [summary] 5 steps in 12.4s · rollout avg 1.0s · train avg 0.4s · off-policy: sync
+15:00:05 INFO  inspect_rl.util.display: [summary] eval/tldr_reward/accuracy -190.250→-225.750 (Δ-35.500)
+15:00:05 INFO  inspect_rl.util.display: [summary] rollout/tldr_reward first5=-244.750→last5=-244.750 (Δ+0.000)
+15:00:05 INFO  inspect_rl.util.summary: [summary] wrote /lus/lfs1aip1/scratch/a5q/alexr.a5q/irl_output_slurm/2026-05-15-14-59-45_slurm_202881/report.md + report.html
+15:00:05 INFO  inspect_rl.core.trainer: === inspect_rl_train done ===

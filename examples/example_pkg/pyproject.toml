@@ -1,0 +1,28 @@
+[project]
+name = "example-pkg"
+version = "0.1.0"
+description = "Minimal downstream package that consumes inspect-rl to verify packaging"
+readme = "README.md"
+authors = [
+    { name = "Alex Remedios", email = "alex.remedios@dsit.gov.uk" },
+]
+requires-python = ">=3.12"
+dependencies = [
+    "inspect-rl",
+]
+
+[project.scripts]
+example-pkg = "example_pkg:main"
+example-tldr = "example_pkg.run_tldr:main"
+
+[build-system]
+requires = ["uv_build>=0.9.26,<0.10.0"]
+build-backend = "uv_build"
+
+# Consume inspect-rl from the surrounding workspace. When copying this
+# directory out of the repo, swap this for a git+ssh source:
+#
+#   [tool.uv.sources]
+#   inspect-rl = { git = "ssh://git@github.com/AI-Safety-Institute/inspect-rl.git" }
+[tool.uv.sources]
+inspect-rl = { workspace = true }

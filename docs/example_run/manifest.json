@@ -1,0 +1,13 @@
+{
+  "model": "google/gemma-3-270m-it",
+  "max_steps": 5,
+  "batch_size": 4,
+  "num_generations": 4,
+  "learning_rate": 1e-05,
+  "max_completion_length": 512,
+  "peft": true,
+  "dataset_limit": 16,
+  "eval_steps": 2,
+  "eval_limit": 4,
+  "world_size": 1
+}

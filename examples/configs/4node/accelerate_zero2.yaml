@@ -1,0 +1,33 @@
+# 3-node, 4-GPU-per-node trainer config with DeepSpeed ZeRO-3 (12 ranks total).
+#
+# ZeRO-3 shards params + grads + optimizer state across the 12 ranks. Required
+# for 7B+ on GH200 because torch.optim.AdamW (selected via torch_adam=true)
+# allocates fp32 m+v state for the FULL unsharded param set on every rank under
+# ZeRO-2 — 56 GiB per rank just for optimizer state, OOM before first step.
+# ZeRO-3 ensures the local optimizer only sees its 1/N shard.
+#
+# Each node launches `accelerate launch --config-file <this> --machine_rank N
+# -m inspect_rl.cli train …` with its own rank. The companion
+# slurm.sbatch fans out the three sruns and sets MACHINE_RANK + MAIN_PROCESS_IP
+# per-node.
+compute_environment: LOCAL_MACHINE
+distributed_type: DEEPSPEED
+num_machines: 3
+num_processes: 12
+# Overridden per-machine on the CLI by the sbatch:
+#   --machine_rank $SLURM_NODEID --main_process_ip $HEAD_TRAINER
+machine_rank: 0
+main_process_ip: 0.0.0.0
+main_process_port: 29500
+rdzv_backend: static
+same_network: true
+gpu_ids: all
+use_cpu: false
+debug: false
+# When deepspeed_config_file is set, accelerate refuses to also specify
+# mixed_precision / zero_stage / gradient_accumulation_steps here — those
+# must live in the deepspeed JSON (where they already do).
+deepspeed_config:
+  deepspeed_config_file: examples/configs/4node/deepspeed.json
+  zero3_init_flag: true
+  deepspeed_multinode_launcher: standard

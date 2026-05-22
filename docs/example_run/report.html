@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset=utf-8><title>2026-05-15-14-59-45_slurm_202881</title><style>body{font:14px/1.5 system-ui,sans-serif;max-width:48rem;margin:2rem auto;padding:0 1rem;color:#222}h1{font-size:1.4rem;border-bottom:1px solid #ccc;padding-bottom:.3em}h2{font-size:1.1rem;margin-top:1.5em}code{background:#f4f4f4;padding:.1em .3em;border-radius:3px;font-size:.9em}a{color:#0366d6;text-decoration:none}a:hover{text-decoration:underline}li{margin:.2em 0}</style></head><body>
+<h1>Run report — <code>2026-05-15-14-59-45_slurm_202881</code></h1>
+<ul>
+<li>model: <code>google/gemma-3-270m-it</code></li>
+<li>planned steps: 5; completed: 5</li>
+<li>runtime: 5 steps in 12.4s · rollout avg 1.0s · train avg 0.4s · off-policy: sync</li>
+</ul>
+<h2>Did the model learn?</h2>
+<p>Before/after window means (first-N vs last-N), held-out val first:</p>
+<ul>
+<li>eval/tldr_reward/accuracy -190.250→-225.750 (Δ-35.500)</li>
+<li>rollout/tldr_reward first5=-244.750→last5=-244.750 (Δ+0.000)</li>
+</ul>
+<h2>Artifacts</h2>
+<ul>
+<li><a href="manifest.json">manifest.json</a></li>
+<li><a href="train.log">train.log</a></li>
+<li>latest checkpoint: <a href="checkpoints/checkpoint-5"><code>checkpoint-5</code></a> (of 1)</li>
+<li>val eval logs: <code>eval_logs/*_val/</code> (4 runs; baseline=<a href="eval_logs/000_val"><code>000_val</code></a>, final=<a href="eval_logs/005_val"><code>005_val</code></a>)</li>
+<li>rollout logs: <code>eval_logs/*_rollout/</code> (5 steps; final=<a href="eval_logs/005_rollout"><code>005_rollout</code></a>)</li>
+</ul>
+</body></html>
