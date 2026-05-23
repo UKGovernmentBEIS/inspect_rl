@@ -86,7 +86,7 @@ gains an offline mode.
 2. Lift `model_init_kwargs={"device_map": None, "dtype": "bfloat16"}`
    into `inspect_rl/trainer.py` defaults for any distributed run, so
    other examples get it for free.
-3. `examples/configs/4node/accelerate_zero2.yaml` is a misnomer (it
+3. `examples/configs/hpc1/4node/accelerate_zero2.yaml` is a misnomer (it
    runs ZeRO-3). Rename in a follow-up.
 4. Filing an upstream issue against TRL: extend the
    `MULTI_GPU / DEEPSPEED → device_map=None` override

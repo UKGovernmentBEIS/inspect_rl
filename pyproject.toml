@@ -71,7 +71,6 @@ torch = { index = "pytorch" }
 triton = { index = "pytorch" }
 inspect-evals = { git = "https://github.com/UKGovernmentBEIS/inspect_evals" }
 inspect-ai = { git = "https://github.com/UKGovernmentBEIS/inspect_ai" }
-autonomous-notebooks = { git = "ssh://git@github.com/treebeardtech/autonomous-notebooks", branch = "alex-remedios/2026-04-21-misc" }
 
 [tool.uv.workspace]
 members = [

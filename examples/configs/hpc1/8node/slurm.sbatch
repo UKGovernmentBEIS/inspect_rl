@@ -14,7 +14,7 @@
 #
 # Usage:
 #   env -u MODEL sbatch --export=ALL,NCCL_NET=Socket,MODEL=Qwen/Qwen2.5-72B-Instruct,EXAMPLE=math-agent,MAX_STEPS=3 \
-#       examples/configs/8node/slurm.sbatch
+#       examples/configs/hpc1/8node/slurm.sbatch
 #
 #SBATCH --job-name=irl-combined-8node
 #SBATCH --partition=workq
@@ -49,7 +49,7 @@ MAX_STEPS=${MAX_STEPS:-}
 OFF_POLICY_STEPS=${OFF_POLICY_STEPS:-0}
 RESAMPLE_ROUNDS=${RESAMPLE_ROUNDS:-}
 WANDB=${WANDB:-0}
-ACCELERATE_CONFIG=${ACCELERATE_CONFIG:-examples/configs/8node/accelerate_zero3.yaml}
+ACCELERATE_CONFIG=${ACCELERATE_CONFIG:-examples/configs/hpc1/8node/accelerate_zero3.yaml}
 VLLM_PORT=${VLLM_PORT:-8000}
 VLLM_URL="http://${VLLM_NODE}:${VLLM_PORT}"
 

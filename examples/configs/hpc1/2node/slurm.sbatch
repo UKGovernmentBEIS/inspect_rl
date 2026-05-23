@@ -1,11 +1,10 @@
 #!/bin/bash
 #
-# 4-node combined run: 1 vLLM node (4 GPUs, TP=4) + 3 trainer nodes
-# (4 GPUs × 3 = 12 ranks, accelerate DeepSpeed ZeRO-2).
+# 2-node combined run: 1 vLLM node (1 GPU, TP=1) + 1 trainer node (4 GPUs DDP).
 #
-# Production-shape topology. TP=4 vLLM holds a 7-8B model comfortably; the
-# 12-rank ZeRO-2 trainer can train the same model with full Adam state
-# sharded across ranks (~12× memory reduction over plain DDP).
+# Smallest topology that exercises the "vLLM on separate node + multi-GPU
+# trainer" path. Use this as the entry-point smoke test for any change to
+# the trainer↔vLLM weight-sync plumbing.
 #
 # vLLM and trainer run as concurrent srun steps within ONE Slurm job — this
 # is required on Slingshot/CXI clusters to share the job's VNI namespace.
@@ -14,18 +13,18 @@
 # journal/008_multinode/006).
 #
 # Usage:
-#   env -u MODEL sbatch --export=ALL,NCCL_NET=Socket,MODEL=Qwen/Qwen2.5-7B-Instruct,EXAMPLE=tldr,MAX_STEPS=20 \
-#       examples/configs/4node/slurm.sbatch
+#   env -u MODEL sbatch --export=ALL,NCCL_NET=Socket,MODEL=Qwen/Qwen2.5-0.5B-Instruct,EXAMPLE=tldr,MAX_STEPS=2 \
+#       examples/configs/hpc1/2node/slurm.sbatch
 #
 # Debug mode (NCCL_DEBUG=TRACE + libfabric trace + py-spy sidecar):
-#   env -u MODEL sbatch --export=ALL,IRL_DEBUG=1,NCCL_NET=Socket,MODEL=...,MAX_STEPS=2 \
-#       examples/configs/4node/slurm.sbatch
+#   env -u MODEL sbatch --export=ALL,IRL_DEBUG=1,NCCL_NET=Socket,MODEL=...,EXAMPLE=tldr,MAX_STEPS=2 \
+#       examples/configs/hpc1/2node/slurm.sbatch
 #
-#SBATCH --job-name=irl-combined-4node
+#SBATCH --job-name=irl-combined-2node
 #SBATCH --partition=workq
-#SBATCH --nodes=4
+#SBATCH --nodes=2
 #SBATCH --gpus-per-node=4
-#SBATCH --time=08:00:00
+#SBATCH --time=02:00:00
 #SBATCH --output=/dev/null
 
 set -euo pipefail
@@ -39,25 +38,19 @@ touch "$RUN_DIR/vllm.out" "$RUN_DIR/trainer-0.out"
 
 NODES=($(scontrol show hostnames "$SLURM_JOB_NODELIST"))
 VLLM_NODE="${NODES[0]}"
-TRAINER_NODES=("${NODES[@]:1}")
-TRAINER_NODELIST=$(IFS=,; echo "${TRAINER_NODES[*]}")
-HEAD_TRAINER="${TRAINER_NODES[0]}"
-TRAINER_NODE_COUNT=${#TRAINER_NODES[@]}
+TRAINER_NODE="${NODES[1]}"
 GPUS_PER_NODE=${GPUS_PER_NODE:-4}
-TRAINER_RANKS=$((TRAINER_NODE_COUNT * GPUS_PER_NODE))
+TRAINER_RANKS=$GPUS_PER_NODE
 
-MODEL=${MODEL:-Qwen/Qwen2.5-7B-Instruct}
+MODEL=${MODEL:-Qwen/Qwen2.5-0.5B-Instruct}
 EXAMPLE=${EXAMPLE:-tldr}
-TP=${TP:-4}
-DEVICES=${DEVICES:-0,1,2,3}
 MAX_STEPS=${MAX_STEPS:-}
 OFF_POLICY_STEPS=${OFF_POLICY_STEPS:-0}
-RESAMPLE_ROUNDS=${RESAMPLE_ROUNDS:-}
 WANDB=${WANDB:-0}
-ACCELERATE_CONFIG=${ACCELERATE_CONFIG:-examples/configs/4node/accelerate.yaml}
 VLLM_PORT=${VLLM_PORT:-8000}
 VLLM_URL="http://${VLLM_NODE}:${VLLM_PORT}"
 
+# Debug mode (opt-in): turns on NCCL/libfabric trace + py-spy sidecar.
 if [ "${IRL_DEBUG:-${DEBUG:-0}}" = "1" ]; then
     export NCCL_DEBUG=TRACE
     export NCCL_DEBUG_SUBSYS=ALL
@@ -72,22 +65,20 @@ fi
 TRAIN_EXTRA="--model $MODEL"
 [ -n "$MAX_STEPS" ] && TRAIN_EXTRA="$TRAIN_EXTRA --max-steps $MAX_STEPS"
 [ -n "$OFF_POLICY_STEPS" ] && TRAIN_EXTRA="$TRAIN_EXTRA --off-policy-steps $OFF_POLICY_STEPS"
-[ -n "$RESAMPLE_ROUNDS" ] && TRAIN_EXTRA="$TRAIN_EXTRA --resample-rounds $RESAMPLE_ROUNDS"
 [ "$WANDB" = "1" ] && TRAIN_EXTRA="$TRAIN_EXTRA --wandb"
 
 echo "rundir:        $RUN_DIR/"
-echo "vllm node:     $VLLM_NODE  (TP=$TP, devices=$DEVICES)"
-echo "trainer nodes: $TRAINER_NODELIST  ($TRAINER_NODE_COUNT × $GPUS_PER_NODE GPUs = $TRAINER_RANKS ranks)"
+echo "vllm node:     $VLLM_NODE  (TP=1, 1 GPU)"
+echo "trainer node:  $TRAINER_NODE  ($GPUS_PER_NODE GPUs DDP)"
 echo "model:         $MODEL"
 echo "example:       $EXAMPLE"
 echo "vllm url:      $VLLM_URL"
-echo "accelerate:    $ACCELERATE_CONFIG"
 
-# py-spy sidecar — only used when IRL_DEBUG=1.
+# py-spy sidecar — only used when IRL_DEBUG=1. Defined before either srun step.
 PYSPY_SCRIPT="$RUN_DIR/pyspy_sidecar.sh"
 cat > "$PYSPY_SCRIPT" <<'PYSPY_EOF'
 #!/bin/bash
-LOGDIR="$1"; CWD="$2"; PATTERN="$3"
+RUN_DIR="$1"; CWD="$2"; PATTERN="$3"
 cd "$CWD"
 sleep 30
 while true; do
@@ -103,18 +94,20 @@ PYSPY_EOF
 chmod +x "$PYSPY_SCRIPT"
 
 # -----------------------------------------------------------------------
-# Step 1: vLLM on node 0, TP=4 across all 4 GPUs.
+# Step 1: vLLM on node 0, 1 GPU, TP=1.
 # -----------------------------------------------------------------------
 srun --nodes=1 --ntasks=1 --nodelist="$VLLM_NODE" --gpus-per-node="$GPUS_PER_NODE" \
     --output="$RUN_DIR/vllm.out" --export=ALL \
     bash -c "
         cd $SLURM_SUBMIT_DIR
         echo "[sbatch] NOTE: add 'module load' for your cluster's NCCL/OFI modules here if cross-node NCCL requires them"
-        export CUDA_VISIBLE_DEVICES=$DEVICES
+        export CUDA_VISIBLE_DEVICES=0
         export HF_HUB_OFFLINE=1
         export TRANSFORMERS_OFFLINE=1
         export CUDA_HOME=\${CUDA_HOME:-/opt/nvidia/hpc_sdk/Linux_aarch64/24.11/cuda}
-        # Re-apply env knobs AFTER module load (some NCCL modules reset NCCL_NET/NCCL_DEBUG).
+        # Re-apply env knobs AFTER module load (some NCCL modules reset
+        # NCCL_NET and NCCL_DEBUG — override them back here).
+        # Outer-shell single-quoted expansion baked in here.
         [ -n '${NCCL_DEBUG:-}' ] && export NCCL_DEBUG='${NCCL_DEBUG:-}'
         [ -n '${NCCL_DEBUG_SUBSYS:-}' ] && export NCCL_DEBUG_SUBSYS='${NCCL_DEBUG_SUBSYS:-}'
         [ -n '${NCCL_NET:-}' ] && export NCCL_NET='${NCCL_NET:-}'
@@ -126,8 +119,8 @@ srun --nodes=1 --ntasks=1 --nodelist="$VLLM_NODE" --gpus-per-node="$GPUS_PER_NOD
             bash $PYSPY_SCRIPT $RUN_DIR $SLURM_SUBMIT_DIR 'trl.scripts.vllm_serve|vllm-serve|EngineCore' &
         fi
         uv run --no-sync irl serve '$MODEL' \
-            --tensor-parallel-size $TP \
-            --devices $DEVICES \
+            --tensor-parallel-size 1 \
+            --devices 0 \
             --gpu-memory-utilization 0.9
     " &
 VLLM_PID=$!
@@ -140,7 +133,7 @@ cleanup() {
 trap cleanup EXIT
 
 # -----------------------------------------------------------------------
-# Step 2: wait for vLLM to be ready (TP=4 + 7B model = ~3-5 min warmup).
+# Step 2: wait for vLLM to be ready.
 # -----------------------------------------------------------------------
 echo "Waiting for vLLM at $VLLM_URL ..."
 for i in $(seq 1 240); do
@@ -160,11 +153,10 @@ if ! curl -sf "$VLLM_URL/health/" >/dev/null 2>&1; then
 fi
 
 # -----------------------------------------------------------------------
-# Step 3: trainer across 3 nodes (12 ranks) via accelerate + DeepSpeed.
+# Step 3: trainer on node 1, 4 GPUs DDP (accelerate single-node config).
 # -----------------------------------------------------------------------
-srun --nodes="$TRAINER_NODE_COUNT" --ntasks="$TRAINER_NODE_COUNT" --ntasks-per-node=1 \
-    --nodelist="$TRAINER_NODELIST" --gpus-per-node="$GPUS_PER_NODE" \
-    --output="$RUN_DIR/trainer-%n.out" --export=ALL \
+srun --nodes=1 --ntasks=1 --nodelist="$TRAINER_NODE" --gpus-per-node="$GPUS_PER_NODE" \
+    --output="$RUN_DIR/trainer-0.out" --export=ALL \
     bash -c "
         cd $SLURM_SUBMIT_DIR
         echo "[sbatch] NOTE: add 'module load' for your cluster's NCCL/OFI modules here if cross-node NCCL requires them"
@@ -183,19 +175,15 @@ srun --nodes="$TRAINER_NODE_COUNT" --ntasks="$TRAINER_NODE_COUNT" --ntasks-per-n
         export TORCH_NCCL_HEARTBEAT_TIMEOUT_SEC=300
         export WANDB_API_KEY=\${WANDB_API_KEY:-}
         export WANDB_BASE_URL=\${WANDB_BASE_URL:-}
-        export MACHINE_RANK=\$SLURM_NODEID
-        # Tell create_run_dir to reuse this directory (skip its own timestamping).
+        # Tell create_run_dir to reuse this directory (skip its own timestamping)
+        # so trainer artifacts land alongside slurm stdouts.
         export INSPECT_RL_RUN_DIR=$SLURM_SUBMIT_DIR/$RUN_DIR
-        echo \"[trainer \$(hostname) machine_rank=\$MACHINE_RANK] starting accelerate; knobs:\" \$(env | grep -E '^(NCCL_DEBUG|NCCL_NET|FI_LOG)' | tr '\\n' ' ')
+        echo \"[trainer \$(hostname)] starting accelerate; knobs:\" \$(env | grep -E '^(NCCL_DEBUG|NCCL_NET|FI_LOG)' | tr '\\n' ' ')
         if [ \"\${IRL_DEBUG:-0}\" = \"1\" ]; then
             bash $PYSPY_SCRIPT $RUN_DIR $SLURM_SUBMIT_DIR 'inspect_rl.cli' &
         fi
         uv run --no-sync accelerate launch \
-            --config-file $ACCELERATE_CONFIG \
-            --num_machines $TRAINER_NODE_COUNT \
-            --num_processes $TRAINER_RANKS \
-            --machine_rank \$MACHINE_RANK \
-            --main_process_ip $HEAD_TRAINER \
+            --config-file examples/configs/hpc1/2node/accelerate.yaml \
             -m inspect_rl.cli train $EXAMPLE \
             --vllm-base-url $VLLM_URL \
             --per-device-train-batch-size 2 \

@@ -115,7 +115,7 @@ def train(
     eval_steps: int = 5,
     eval_limit: int = 50,
     resample_rounds: int = 3,
-    off_policy_steps: int = -1,
+    off_policy_steps: int = 0,
     resume: str | None = None,
     wandb: bool = False,
     verbose: bool = False,
