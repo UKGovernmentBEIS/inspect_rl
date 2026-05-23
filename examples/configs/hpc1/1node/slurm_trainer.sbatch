@@ -7,10 +7,10 @@
 # verify the split vLLM/trainer plumbing works before adding FSDP/multi-node.
 #
 # Usage:
-#   sbatch examples/configs/1node/slurm_vllm.sbatch        # wait until ready
+#   sbatch examples/configs/hpc1/1node/slurm_vllm.sbatch        # wait until ready
 #   VLLM_URL=$(cat irl_output_slurm/latest/vllm_url.txt)
 #   env -u MODEL sbatch --export=ALL,VLLM_URL=$VLLM_URL,MAX_STEPS=2 \
-#       examples/configs/1node/slurm_trainer.sbatch
+#       examples/configs/hpc1/1node/slurm_trainer.sbatch
 #
 #SBATCH --job-name=irl-trainer-1node
 #SBATCH --partition=workq
@@ -33,7 +33,7 @@ touch "$RUN_DIR/trainer.out"
 if [ -z "${VLLM_URL:-}" ]; then
     echo "ERROR: VLLM_URL not set."
     echo "  VLLM_URL=\$(cat irl_output_slurm/latest/vllm_url.txt)"
-    echo "  env -u MODEL sbatch --export=ALL,VLLM_URL=\$VLLM_URL,... examples/configs/1node/slurm_trainer.sbatch"
+    echo "  env -u MODEL sbatch --export=ALL,VLLM_URL=\$VLLM_URL,... examples/configs/hpc1/1node/slurm_trainer.sbatch"
     exit 1
 fi
 
@@ -96,7 +96,7 @@ srun --nodes=1 --ntasks=1 --gpus-per-node=4 \
         echo \"[node \$(hostname)] starting accelerate\"
         bash $PYSPY_SCRIPT $RUN_DIR $SLURM_SUBMIT_DIR &
         uv run --no-sync accelerate launch \
-            --config-file examples/configs/1node/accelerate.yaml \
+            --config-file examples/configs/hpc1/1node/accelerate.yaml \
             -m inspect_rl.cli train $EXAMPLE \
             --vllm-base-url $VLLM_URL \
             --per-device-train-batch-size 2 \

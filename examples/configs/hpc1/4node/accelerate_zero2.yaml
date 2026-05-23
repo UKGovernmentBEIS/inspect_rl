@@ -28,6 +28,6 @@ debug: false
 # mixed_precision / zero_stage / gradient_accumulation_steps here — those
 # must live in the deepspeed JSON (where they already do).
 deepspeed_config:
-  deepspeed_config_file: examples/configs/4node/deepspeed.json
+  deepspeed_config_file: examples/configs/hpc1/4node/deepspeed.json
   zero3_init_flag: true
   deepspeed_multinode_launcher: standard

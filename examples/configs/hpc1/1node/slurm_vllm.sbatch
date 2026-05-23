@@ -8,7 +8,7 @@
 # multi-node trainers, use 2node/slurm.sbatch or 4node/slurm.sbatch.
 #
 # Usage:
-#   sbatch examples/configs/1node/slurm_vllm.sbatch
+#   sbatch examples/configs/hpc1/1node/slurm_vllm.sbatch
 #   # Wait for "vLLM ready" line, then submit the trainer job pointing at the URL.
 #
 #SBATCH --job-name=irl-vllm

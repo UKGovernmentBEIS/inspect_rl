@@ -65,6 +65,46 @@ smoke vllm_gpu="0" train_gpu="1":
     uv run irl train --devices {{train_gpu}} tldr --max-steps 1
     echo "[smoke] PASSED"
 
+# Clean up old irl_output_slurm run directories, keeping the most recent N.
+# Targets dirs only (e.g. 2026-05-23-13-23-26_slurm_<jobid>/) — leaves
+# `latest` / `latest_vllm` symlinks alone, and re-points `latest` if it
+# pointed at a now-deleted dir.
+clean-irl-output keep="5":
+    #!/usr/bin/env bash
+    set -euo pipefail
+    shopt -s nullglob
+    # Real dirs only (not symlinks), newest first.
+    mapfile -t dirs < <(find irl_output_slurm -mindepth 1 -maxdepth 1 -type d -printf '%T@ %p\n' \
+        | sort -rn | awk '{print $2}')
+    count=${#dirs[@]}
+    echo "found $count irl_output_slurm dirs, keeping {{keep}}"
+    if [ "$count" -le {{keep}} ]; then echo "nothing to remove"; exit 0; fi
+    # Don't delete whatever `latest` currently resolves to (active run).
+    active=""
+    [ -L irl_output_slurm/latest ] && active=$(readlink -f irl_output_slurm/latest 2>/dev/null || true)
+    removed=0
+    for d in "${dirs[@]:{{keep}}}"; do
+        if [ -n "$active" ] && [ "$(readlink -f "$d")" = "$active" ]; then
+            echo "skipping active: $d"; continue
+        fi
+        if rm -rf "$d" 2>/dev/null; then
+            removed=$((removed+1))
+        else
+            echo "skipped (busy/open files): $d"
+        fi
+    done
+    echo "removed $removed dirs"
+    if [ -L irl_output_slurm/latest ] && [ ! -e irl_output_slurm/latest ]; then
+        newest=$(find irl_output_slurm -mindepth 1 -maxdepth 1 -type d -printf '%T@ %f\n' \
+            | sort -rn | awk '{print $2; exit}')
+        if [ -n "$newest" ]; then
+            ln -sfn "$newest" irl_output_slurm/latest
+            echo "repointed latest -> $newest"
+        else
+            rm irl_output_slurm/latest && echo "removed dangling latest symlink"
+        fi
+    fi
+
 # Clean up old slurm log directories, keeping the most recent 10.
 # Targets slurm_logs/<datetime>_<jobid>/ — leaves the symlink + any other files alone.
 clean-slurm-logs keep="10":
@@ -76,6 +116,23 @@ clean-slurm-logs keep="10":
         else \
             echo "nothing to remove"; \
         fi
+
+# At-a-glance Slurm cluster utilisation: partitions, your jobs, per-node
+# GPU allocation. Useful before submitting to avoid piling onto a saturated
+# node (see "Shared Slurm clusters" in README).
+cluster-status:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    echo "── partitions ──────────────────────────────────────────────"
+    sinfo -o "%20P %5a %10l %6D %10t %N"
+    echo
+    echo "── your jobs ───────────────────────────────────────────────"
+    squeue --me -o "%.10i %.12P %.20j %.8T %.10M %.6D %R"
+    echo
+    echo "── GPU allocation per node (alloc/total) ───────────────────"
+    sinfo -N -o "%N %G %C %t" -h | awk '{printf "  %-20s gres=%-20s cpus=%-15s state=%s\n", $1, $2, $3, $4}' | sort -u
+    echo
+    echo "── tip: 'squeue -p <partition> -o \"%.10i %.8u %.6D %R\"' to see neighbours ──"
 
 # Slurm HPC (arm64): fetch arm64 kubectl and configure EKS.
 # Reads AWS_EKS_CLUSTER and K8S_NAMESPACE_USER from the environment — see

@@ -62,9 +62,15 @@ def inspect_rl_train(
     eval_limit: int = 50,
     resume_from: str | Path | None = None,
     max_resample_rounds: int = 0,
-    off_policy_steps: int = -1,
+    off_policy_steps: int = 0,
 ) -> GRPOTrainer:
-    """Train a model using GRPO with an Inspect Task as the reward signal."""
+    """Train a model using GRPO with an Inspect Task as the reward signal.
+
+    `off_policy_steps` defaults to 0 (synchronous rollouts). Setting >0 or -1
+    enables the prefetcher (`FreshestPrefetchRolloutFunc` / `AutoCalibratingRolloutFunc`),
+    which is currently unstable under multi-rank DDP — see
+    journal/009_h200_smoke/002_8gpu_ddp_smoke.md (KeyError: 'inspect_scores').
+    """
     logger.info("=== inspect_rl_train start: model=%s ===", model)
     _summary.reset_state()
     # Accelerate's launch sets env vars on every rank; PartialState reads them

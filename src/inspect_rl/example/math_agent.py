@@ -210,7 +210,7 @@ def train(
     beta: float = 0.05,
     save_steps: int = 10,
     resample_rounds: int = 3,
-    off_policy_steps: int = -1,
+    off_policy_steps: int = 0,
     resume: str | None = None,
     wandb: bool = False,
     verbose: bool = False,

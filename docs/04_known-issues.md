@@ -72,12 +72,12 @@ Each Slurm job is allocated its own CXI **Virtual Network Identifier** (VNI). Wh
 1. Run vLLM and the trainer as concurrent `srun` steps inside a **single** sbatch job (same VNI namespace).
 2. Set `NCCL_NET=Socket` to bypass aws-ofi-nccl entirely — its CXI provider advertises `pid=0` for every peer address, so the libfabric AV table collapses entries with ≥2 trainer nodes and SEND fails with `VNI_NOT_FOUND`. Forcing TCP socket transport sidesteps the plugin.
 
-Worked template: [`examples/configs/2node/slurm.sbatch`](../examples/configs/2node/slurm.sbatch). Submit with:
+Worked template: [`examples/configs/hpc1/2node/slurm.sbatch`](../examples/configs/hpc1/2node/slurm.sbatch). Submit with:
 
 ```bash
 env -u MODEL sbatch \
     --export=ALL,NCCL_NET=Socket,MODEL=Qwen/Qwen2.5-0.5B-Instruct,EXAMPLE=tldr,MAX_STEPS=2 \
-    examples/configs/2node/slurm.sbatch
+    examples/configs/hpc1/2node/slurm.sbatch
 ```
 
 This was validated end-to-end (2-node trainer + 1-node vLLM, 2 training steps in 1m46s) — job 202638, 2026-05-13.
@@ -92,7 +92,7 @@ The combined sbatch takes `IRL_DEBUG=1` to switch on verbose logging that surfac
 
 ```bash
 env -u MODEL sbatch --export=ALL,IRL_DEBUG=1,MODEL=...,EXAMPLE=tldr,MAX_STEPS=2 \
-    examples/configs/2node/slurm.sbatch
+    examples/configs/hpc1/2node/slurm.sbatch
 ```
 
 `IRL_DEBUG=1` enables:
